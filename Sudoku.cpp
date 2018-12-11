@@ -35,3 +35,41 @@ void Sudoku::updateRegions()
         }
     }
 }
+
+std::unique_ptr<Sudoku> Sudoku::loadFile(QString filename)
+{
+    QFile file(filename);
+
+    if (!file.exists())
+    {
+        qCritical() << "File" << QDir::currentPath() + file.fileName() << "does not exist!";
+        return nullptr;
+    }
+
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        return nullptr;
+    }
+
+    // TODO retrieve meta data such as N and shape of board
+    size_t N = 9;
+
+    vector<vector<Cell_p>> cells(N, vector<Cell_p>(N, nullptr));
+    size_t i = 0;
+    size_t j = 0;
+
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        for (i = 0; i < N; ++i)
+        {
+            char c;
+            in >> c;
+            cells[i][j] = std::unique_ptr<Cell>(new Cell);
+            cells[i][j]->value = element(QString(c).toInt());
+        }
+        ++j;
+    }
+
+    return unique_ptr<Sudoku>(new Sudoku(cells));
+}

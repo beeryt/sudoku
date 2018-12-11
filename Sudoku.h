@@ -14,6 +14,8 @@ public:
 
     int N() const { return m_N; }
 
+    static std::unique_ptr<Sudoku> loadFile(QString filename);
+
 private:
     void updateRegions();
 };

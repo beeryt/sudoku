@@ -12,7 +12,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-    shared_ptr<Sudoku> sudoku = new Sudoku();
+    shared_ptr<Sudoku> sudoku = Sudoku::loadFile("debug/sudoku.dat");
     if (!sudoku)
     {
         qCritical("File failed to load");
