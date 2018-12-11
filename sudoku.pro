@@ -14,7 +14,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    sudoku.cpp
+    Sudoku.cpp \
+    SudokuViewModel.cpp \
+    LatinSquare.cpp \
+    Region.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,4 +33,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    sudoku.h
+    Sudoku.h \
+    SudokuViewModel.h \
+    LatinSquare.h \
+    Cell.h \
+    Region.h
